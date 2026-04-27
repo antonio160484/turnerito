@@ -1,9 +1,18 @@
+using Microsoft.EntityFrameworkCore;
+using turnerito_mvc.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+// incluir dbcontext
+builder.Services.AddDbContext<TurneritoDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("TurneritoDbContext")));
+
 var app = builder.Build();
+
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
